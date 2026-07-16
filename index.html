@@ -660,9 +660,9 @@
                                 <span id="selectedModelLabel">sonnet 5</span>
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:12px; height:12px;"><polyline points="6 9 12 15 18 9"></polyline></svg>
                                 <select id="modelSelect" onchange="updateModelLabel()">
-                                    <option value="groq/sonnet-medium">opus 4.8</option>
-                                    <option value="groq/sonnet-flash">Sonnet 5 </option>
-                                    <option value="groq/llama-coder">fable 5</option>
+                                    <option value="groq/compound">opus 4.8</option>
+                                    <option value="groq/compound">Sonnet 5 </option>
+                                    <option value="groq/compound">fable 5</option>
                                 </select>
                             </div>
                             <button class="control-btn" onclick="triggerToast('Microphone input')">
@@ -990,7 +990,7 @@
                     messages: apiMessages, 
                     stream: true,
                     temperature: 0.6,
-                    max_completion_tokens: 1536 
+                    max_completion_tokens: 9000
                 })
             });
 
