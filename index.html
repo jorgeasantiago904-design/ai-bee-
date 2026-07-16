@@ -162,8 +162,8 @@
         }
 
         @keyframes listPopIn {
-            from { opacity: 0; transform: scale(0.95) translateX(-10px); filter: blur(2px); }
-            to { opacity: 1; transform: scale(1) translateX(0); filter: blur(0); }
+            from { opacity: 0; transform: scale(0.95) translateX(-10px) filter: blur(2px); }
+            to { opacity: 1; transform: scale(1) translateX(0) filter: blur(0); }
         }
 
         .history-item:hover {
@@ -631,8 +631,8 @@
             
             <div class="model-selector-wrapper">
                 <select class="model-select" id="modelSelect" onchange="playClickSound()">
-                     <option value="groq/compound">Bee AI pro</option>
-                     <option value="groq/compound">Bee AI flash</option>
+                     <option value="llama-3.3-70b-specdec">Bee AI pro</option>
+                     <option value="llama3-8b-8192">Bee AI flash</option>
                 </select>
             </div>
         </div>
@@ -675,7 +675,8 @@
 
     const audioPool = [];
     const poolSize = 20;
-    const soundUrl = "https://www.myinstants.com/en/instant/minecraft-click/?utm_source=copy&utm_medium=share";
+    // FIXED: Swapped HTML URL for a direct, clean MP3 click audio source
+    const soundUrl = "https://www.soundjay.com/buttons/sounds/button-16.mp3";
 
     for (let i = 0; i < poolSize; i++) {
         const audio = new Audio(soundUrl);
@@ -711,6 +712,7 @@
     }
 
     function createRipple(event, element) {
+        if (!event) return;
         const circle = document.createElement("span");
         const diameter = Math.max(element.clientWidth, element.clientHeight);
         const radius = diameter / 2;
@@ -1156,10 +1158,11 @@
         chatBox.scrollTo({ top: chatBox.scrollHeight, behavior: 'smooth' });
     }
 
+    // FIXED: Correctly pass the keyboard event parameter to sendMessage
     function handleKeyPress(event) {
         if (event.key === 'Enter' && !event.shiftKey) {
             event.preventDefault();
-            sendMessage();
+            sendMessage(event);
         }
     }
 
