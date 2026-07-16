@@ -98,6 +98,27 @@
             text-transform: capitalize;
         }
 
+        /* Sidebar Search Box */
+        .search-container {
+            padding: 0 4px 12px 4px;
+        }
+
+        .search-input {
+            width: 100%;
+            background-color: var(--bg-input);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .search-input:focus {
+            border-color: #4a4a4a;
+        }
+
         /* Recents Section Header */
         .recents-header {
             display: flex;
@@ -623,6 +644,10 @@
             </div>
         </div>
 
+        <div class="search-container">
+            <input type="text" id="chatSearchInput" class="search-input" placeholder="Search chats..." oninput="filterChats()">
+        </div>
+
         <div class="recents-header">
             <span>Recents</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
@@ -660,9 +685,9 @@
                                 <span id="selectedModelLabel">sonnet 5</span>
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:12px; height:12px;"><polyline points="6 9 12 15 18 9"></polyline></svg>
                                 <select id="modelSelect" onchange="updateModelLabel()">
-                                    <option value="groq/compound">opus 4.8</option>
-                                    <option value="groq/compound">Sonnet 5 </option>
-                                    <option value="groq/compound">fable 5</option>
+                                    <option value="groq/sonnet-medium">opus 4.8</option>
+                                    <option value="groq/sonnet-flash">Sonnet 5 </option>
+                                    <option value="groq/llama-coder">fable 5</option>
                                 </select>
                             </div>
                             <button class="control-btn" onclick="triggerToast('Microphone input')">
@@ -711,17 +736,17 @@
     const MODEL_CONFIGS = {
         'groq/sonnet-medium': {
             displayName: "opus 4.8",
-            systemPrompt: "Your name is opus AI. You are a highly professional, polite, and logical AI assistant styled inside an ultra-minimal workspace interface. Talk cleanly, elegantly, and give precise, highly-formatted responses.",
+            systemPrompt: "Your name is opus ",
             apiModel: "groq/compound"
         },
         'groq/sonnet-flash': {
             displayName: "Sonnet 5 ",
-            systemPrompt: "your name is Sonnet. You are a lightning-fast creative designer agent. Keep your answers ultra-punchy, brief, and highly functional. Emphasize speed and action.",
+            systemPrompt: "your name is Sonnet.",
             apiModel: "groq/compound"
         },
         'groq/llama-coder': {
             displayName: "fable 5",
-            systemPrompt: "your name is fable You are an elite code architect. Write strictly optimal, modular code with comments limited only to explanations of extreme complexity. Do not output prose or conversational text unless requested.",
+            systemPrompt: "your name is fable ",
             apiModel: "groq/compound"
         }
     };
@@ -835,6 +860,23 @@
         loadChatMessages();
     }
 
+    function filterChats() {
+        const query = document.getElementById('chatSearchInput').value.toLowerCase();
+        const historyItems = document.querySelectorAll('.chat-history .history-item');
+
+        historyItems.forEach(item => {
+            const titleSpan = item.querySelector('.history-title');
+            if (titleSpan) {
+                const titleText = titleSpan.innerText.toLowerCase();
+                if (titleText.includes(query)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            }
+        });
+    }
+
     function renderSidebar() {
         chatHistoryContainer.innerHTML = '';
         const ids = Object.keys(chatLibrary);
@@ -861,6 +903,9 @@
             row.appendChild(deleteBtn);
             chatHistoryContainer.insertBefore(row, chatHistoryContainer.firstChild);
         });
+
+        // Reapply filter query on render updates to prevent search mismatch
+        filterChats();
     }
 
     function loadChatMessages() {
@@ -986,17 +1031,11 @@
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    "model": activeConfig.apiModel, 
-                    "messages": apiMessages, 
-                    "stream": true,
-                   " temperature": 0.6,
-                    "max_completion_tokens": 9000,
-                     "compound_custom": {
-    "tools": {
-      "enabled_tools": [
-        "web_search",
-        "code_interpreter",
-        "visit_website"
+                    model: activeConfig.apiModel, 
+                    messages: apiMessages, 
+                    stream: true,
+                    temperature: 0.6,
+                    max_completion_tokens: 2000
                 })
             });
 
