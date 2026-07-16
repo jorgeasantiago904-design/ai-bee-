@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>bee AI</title>
+    <title>Bai AI</title>
     <style>
         * {
             box-sizing: border-box;
@@ -12,7 +12,11 @@
         }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background: radial-gradient(circle at 50% -20%, #201a09 0%, #000000 80%);
+            /* Minecraft Bee Texture tile with a dark overlay to make text easy to read */
+            background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.9)), 
+                        url('https://i.pinimg.com/236x/6e/68/21/6e6821db97f6c3fec38bc206776768db.jpg');
+            background-size: 120px; /* Perfectly sizes the block texture as a repeatable grid */
+            background-repeat: repeat;
             color: #ffffff; 
             display: flex;
             height: 100vh;
@@ -35,15 +39,16 @@
         }
         ::-webkit-scrollbar-thumb:hover { background: #fbbb2c; }
         
+        /* REMIXED SIDEBAR */
         .sidebar {
-            width: 280px;
-            background-color: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(20px);
-            padding: 24px 16px;
+            width: 290px;
+            background-color: rgba(10, 8, 4, 0.92);
+            backdrop-filter: blur(25px);
+            padding: 24px 18px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            border-right: 1px solid rgba(251, 187, 44, 0.15); 
+            border-right: 1px solid rgba(251, 187, 44, 0.12); 
             flex-shrink: 0;
             z-index: 10;
             animation: slideSidebar 1s cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -57,71 +62,66 @@
         .sidebar-header {
             display: flex;
             flex-direction: column;
-            gap: 24px;
+            gap: 20px;
         }
         
+        /* STATIC LOGO CONTAINER (No Hover Effects) */
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 14px;
-            padding: 4px;
+            gap: 12px;
+            padding: 6px 4px;
             cursor: pointer;
         }
         .logo-img {
-            width: 36px;
-            height: 36px;
+            width: 34px;
+            height: 34px;
             object-fit: cover;
             border-radius: 8px;
-            border: 1px solid rgba(251, 187, 44, 0.4);
+            border: 1px solid rgba(251, 187, 44, 0.3);
             background-color: transparent; 
             padding: 0;
             display: block;
-            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-        .logo-container:hover .logo-img {
-            transform: rotate(360deg) scale(1.1); 
-            box-shadow: 0 0 20px rgba(251, 187, 44, 0.8);
-            border-color: #fbbb2c;
+        
+        /* STYLING FOR YOUR CUSTOM PNG BRANDING IN SIDEBAR */
+        .logo-text-image {
+            height: 22px; 
+            object-fit: contain;
+            display: block;
         }
-        .logo-text {
-            font-size: 20px;
-            font-weight: 800;
-            color: #ffffff;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            transition: letter-spacing 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .logo-container:hover .logo-text { letter-spacing: 4px; color: #fbbb2c; }
 
+        /* REMIXED NEW CHAT BUTTON */
         .new-chat-btn {
-            background: transparent;
-            color: #ffffff;
-            border: 1px solid rgba(251, 187, 44, 0.3);
-            border-radius: 8px;
-            padding: 14px 16px;
+            background: rgba(251, 187, 44, 0.05);
+            color: #fbbb2c;
+            border: 1px solid rgba(251, 187, 44, 0.25);
+            border-radius: 20px;
+            padding: 12px 18px;
             text-align: left;
-            font-size: 13px;
-            font-weight: 600;
+            font-size: 12px;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
             cursor: pointer;
             position: relative;
             overflow: hidden;
             display: flex;
             align-items: center;
-            gap: 12px;
+            justify-content: center;
+            gap: 10px;
             width: 100%;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .new-chat-btn svg { transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); color: #fbbb2c; }
+        .new-chat-btn svg { transition: transform 0.4s ease; color: #fbbb2c; }
         .new-chat-btn:hover {
             background-color: #fbbb2c;
             color: #000000;
             border-color: #fbbb2c;
-            box-shadow: 0 8px 20px rgba(251, 187, 44, 0.2);
-            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(251, 187, 44, 0.15);
+            transform: translateY(-1px);
         }
-        .new-chat-btn:hover svg { transform: rotate(90deg) scale(1.1); color: #000000; }
+        .new-chat-btn:hover svg { transform: rotate(90deg); color: #000000; }
 
         .ripple {
             position: absolute;
@@ -132,48 +132,53 @@
         }
         @keyframes ripple-anim { to { transform: scale(4); opacity: 0; } }
 
+        /* REMIXED CHAT HISTORY */
         .chat-history {
             flex: 1;
             margin-top: 24px;
-            font-size: 14px;
+            font-size: 13.5px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 4px;
-            padding-right: 4px;
+            gap: 6px;
+            padding-right: 2px;
         }
         
         .history-item {
-            padding: 12px 16px;
-            border-radius: 8px;
+            padding: 12px 14px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.01);
             border: 1px solid transparent;
+            border-left: 3px solid transparent;
             cursor: pointer;
-            color: #888888; 
+            color: #999999; 
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: relative;
             transform-origin: left center;
             animation: listPopIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.3s ease;
         }
 
         @keyframes listPopIn {
-            from { opacity: 0; transform: scale(0.9) translateX(-20px); filter: blur(4px); }
+            from { opacity: 0; transform: scale(0.95) translateX(-10px); filter: blur(2px); }
             to { opacity: 1; transform: scale(1) translateX(0); filter: blur(0); }
         }
 
         .history-item:hover {
-            background: rgba(251, 187, 44, 0.05);
-            color: #fbbb2c;
-            padding-left: 20px; 
+            background: rgba(251, 187, 44, 0.04);
+            color: #ffffff;
+            border-left: 3px solid rgba(251, 187, 44, 0.4);
         }
         .history-item.active {
-            background: #fbbb2c;
-            color: #000000;
-            font-weight: 700;
-            box-shadow: 0 4px 15px rgba(251, 187, 44, 0.3);
-            padding-left: 20px;
+            background: rgba(251, 187, 44, 0.08);
+            color: #fbbb2c;
+            font-weight: 600;
+            border-left: 3px solid #fbbb2c;
+            border-top: 1px solid rgba(251, 187, 44, 0.1);
+            border-right: 1px solid rgba(251, 187, 44, 0.1);
+            border-bottom: 1px solid rgba(251, 187, 44, 0.1);
         }
         .history-title {
             white-space: nowrap;
@@ -192,32 +197,32 @@
             justify-content: center;
             padding: 4px;
             opacity: 0;
-            transform: scale(0.5) rotate(-45deg);
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform: scale(0.7);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         .history-item:hover .delete-chat-btn,
         .history-item.active .delete-chat-btn {
-            opacity: 0.6;
-            transform: scale(1) rotate(0deg);
+            opacity: 0.5;
+            transform: scale(1);
         }
         .delete-chat-btn:hover {
             opacity: 1 !important;
-            color: #ff3333 !important;
-            transform: scale(1.2) rotate(10deg) !important;
+            color: #ff4444 !important;
+            transform: scale(1.1) !important;
         }
 
         .history-item.deleting {
             animation: listCollapse 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
         @keyframes listCollapse {
-            to { opacity: 0; transform: translateX(50px) scale(0.9); height: 0; padding: 0; margin: 0; }
+            to { opacity: 0; transform: translateX(30px) scale(0.9); height: 0; padding: 0; margin: 0; }
         }
 
         .sidebar-footer {
             padding: 16px 4px 4px 4px;
-            border-top: 1px solid rgba(251, 187, 44, 0.1);
-            font-size: 11px;
-            color: #555555;
+            border-top: 1px solid rgba(251, 187, 44, 0.08);
+            font-size: 10px;
+            color: #444444;
             letter-spacing: 2px;
             text-transform: uppercase;
             text-align: center;
@@ -239,7 +244,7 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid rgba(251, 187, 44, 0.1); 
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.65);
             backdrop-filter: blur(10px);
             flex-shrink: 0;
             height: 70px;
@@ -252,16 +257,22 @@
             to { transform: translateY(0); opacity: 1; }
         }
 
-        .brand-title {
-            font-size: 18px;
-            font-weight: 800;
-            color: #ffffff;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            text-shadow: 0 0 10px rgba(251, 187, 44, 0.3);
+        /* CONTAINER FOR TOP HEADER LOGO */
+        .brand-title-container {
+            display: flex;
+            align-items: center;
+            height: 100%;
         }
+        
+        /* STYLING FOR YOUR CUSTOM PNG BRANDING IN TOP HEADER */
+        .header-logo-image {
+            height: 24px; 
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(251, 187, 44, 0.45)); /* Replaces the old text glow shadow */
+        }
+
         .model-select {
-            background-color: rgba(255, 255, 255, 0.05);
+            background-color: rgba(0, 0, 0, 0.5);
             color: #ffffff;
             border: 1px solid rgba(251, 187, 44, 0.3);
             padding: 8px 16px;
@@ -355,12 +366,13 @@
             transform: scale(1.1);
         }
         .message-row.ai-row .text-block {
-            color: #e0e0e0;
+            color: #f0f0f0;
             padding: 8px 0;
             max-width: calc(100% - 60px);
             font-size: 16px;
             line-height: 1.7;
             width: 100%;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
         }
 
         a.chat-link {
@@ -463,7 +475,7 @@
             flex-direction: column;
             align-items: center;
             flex-shrink: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.9) 20%, transparent);
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 30%, transparent);
             animation: slideInput 1s cubic-bezier(0.16, 1, 0.3, 1) both;
             z-index: 5;
         }
@@ -476,19 +488,19 @@
         .input-wrapper {
             max-width: 850px;
             width: 100%;
-            background-color: rgba(25, 25, 25, 0.85);
+            background-color: rgba(20, 20, 20, 0.92);
             backdrop-filter: blur(15px);
             border: 1px solid rgba(251, 187, 44, 0.2);
             border-radius: 24px;
             display: flex;
             flex-direction: column;
             padding: 12px 16px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.85);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
         }
         .input-wrapper:focus-within {
-            box-shadow: 0 15px 50px rgba(251, 187, 44, 0.1);
+            box-shadow: 0 15px 50px rgba(251, 187, 44, 0.15);
             border-color: rgba(251, 187, 44, 0.5);
             transform: translateY(-2px);
         }
@@ -596,11 +608,12 @@
     <div class="sidebar">
         <div class="sidebar-header">
             <div class="logo-container" onclick="playClickSound(); location.reload()">
-                <img src="https://minecraft.wiki/images/Baby_Bee_BE2.gif?693e6" alt="bee logo" class="logo-img" id="logoImg">
-                <span class="logo-text">bee AI</span>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgGbIL8ZPdSPu6hTlRtfzbXE4hhPn977svX9BmFQN3Mg&s=10" alt="bee logo" class="logo-img" id="logoImg">
+                
+                <img src="your-custom-logo-text.png" alt="Bai AI" class="logo-text-image">
             </div>
             <button class="new-chat-btn" id="newChatBtn">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                 New Hive Session
             </button>
         </div>
@@ -612,11 +625,14 @@
 
     <div class="main-content">
         <div class="header">
-            <div class="brand-title" id="displayTitle">bee ai</div>
+            <div class="brand-title-container">
+                <img src="your-custom-logo-text.png" alt="Bai AI" class="header-logo-image">
+            </div>
+            
             <div class="model-selector-wrapper">
                 <select class="model-select" id="modelSelect" onchange="playClickSound()">
-                     <option value="groq/compound">bee ai pro</option>
-                     <option value="groq/compound">bee ai flash</option>
+                     <option value="groq/compound">Bee AI pro</option>
+                     <option value="groq/compound">Bee AI flash</option>
                 </select>
             </div>
         </div>
@@ -629,7 +645,7 @@
                     <button class="action-btn mic-btn" id="micBtn" onclick="playClickSound(); toggleMicrophone()">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
                     </button>
-                    <textarea id="userInput" placeholder="Message bee AI..." rows="1" oninput="autoGrow(this)" onkeypress="handleKeyPress(event)"></textarea>
+                    <textarea id="userInput" placeholder="Message Bee AI..." rows="1" oninput="autoGrow(this)" onkeypress="handleKeyPress(event)"></textarea>
                     <button class="send-btn" id="sendBtn" onclick="sendMessage(event)">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
                     </button>
@@ -640,11 +656,9 @@
     </div>
 
 <script>
-    const CHATBOT_NAME = "bee ai";
-    const SYSTEM_PROMPT = "Your name is bee AI. you are a bee from minecraft baby";
+    const CHATBOT_NAME = "Bai AI";
+    const SYSTEM_PROMPT = "Your name is Bee AI. You are a Minecraft baby bee themed AI assistant. Talk completely naturally, logically, and professionally. Keep responses concise, direct, fast, and optimized to save performance. Personality: precise, quiet, and cold-headed.";
     const apiKey = "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"; 
-
-    document.getElementById('displayTitle').innerText = CHATBOT_NAME;
 
     const userInput = document.getElementById('userInput');
     const sendBtn = document.getElementById('sendBtn');
@@ -684,7 +698,7 @@
         if (savedPerms[permissionType] === 'granted') {
             return Promise.resolve(true);
         }
-        const accept = confirm(`bee AI requests system authorization to access your "${permissionType}". Permit access?`);
+        const accept = confirm(`Bee AI requests system authorization to access your "${permissionType}". Permit access?`);
         if (accept) {
             savedPerms[permissionType] = 'granted';
             localStorage.setItem('sol_permissions', JSON.stringify(savedPerms));
@@ -950,7 +964,6 @@
                 apiMessages.push({ role: msg.role, content: msg.content });
             });
 
-            // Fast, optimized parameters
             const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
                 method: 'POST',
                 headers: {
@@ -978,7 +991,7 @@
             let buffer = "";
             let hasBegunReceiving = false;
 
-            while (true) {
+            outerStreamLoop: while (true) {
                 const { value, done } = await reader.read();
                 if (done) break;
 
@@ -989,7 +1002,9 @@
                 for (const line of lines) {
                     const cleanLine = line.trim();
                     if (!cleanLine) continue;
-                    if (cleanLine === "data: [DONE]") break;
+                    if (cleanLine === "data: [DONE]") {
+                        break outerStreamLoop;
+                    }
                     if (cleanLine.startsWith("data: ")) {
                         try {
                             const parsed = JSON.parse(cleanLine.substring(6));
@@ -1021,7 +1036,7 @@
         row.className = 'message-row ai-row';
         row.style.animationDelay = '0s';
         row.innerHTML = `
-            <div class="ai-avatar" style="border-color: #555;">BEE</div>
+            <div class="ai-avatar" style="border-color: #555;">Bee</div>
             <div class="text-block" style="color: #666; font-size: 13px; font-weight: 600;">${escapeHtml(text)}</div>
         `;
         chatBox.appendChild(row);
@@ -1047,7 +1062,7 @@
         row.style.animationDelay = `${Math.min(idx * 0.08, 0.5)}s`;
         row.innerHTML = `
             <div class="ai-avatar">
-                <img src="https://minecraft.wiki/images/Baby_Bee_BE2.gif?693e6" alt="bee avatar">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgGbIL8ZPdSPu6hTlRtfzbXE4hhPn977svX9BmFQN3Mg&s=10" alt="Bee avatar">
             </div>
             <div class="text-block"></div>
         `;
@@ -1094,6 +1109,8 @@
                 textPart = textPart.replace(/`([^`\n]+)`/g, '<code style="background: rgba(251, 187, 44, 0.15); padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 90%; color: #ffd666;">$1</code>');
                 textPart = textPart.replace(/\n/g, '<br>');
                 textPart = textPart.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" style="max-width: 100%; border-radius: 16px; margin-top: 12px; display: block; border: 1px solid rgba(251,187,44,0.3); box-shadow: 0 10px 30px rgba(251,187,44,0.1); animation: liquidBounce 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;">');
+                textPart = textPart.replace(/_([^_]+)_/g, '<em>$1</em>');
+                textPart = textPart.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
                 textPart = textPart.replace(/(^|\s)(https:\/\/image\.pollinations\.ai\/[^\s<]+)/g, '$1<img src="$2" alt="Generated Image" style="max-width: 100%; border-radius: 16px; margin-top: 12px; display: block; border: 1px solid rgba(251,187,44,0.3); box-shadow: 0 10px 30px rgba(251,187,44,0.1); animation: liquidBounce 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;">');
                 textPart = textPart.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" class="chat-link">$1</a>');
                 textPart = textPart.replace(/(^|\s)(https?:\/\/[^\s<)]+)/g, function(match, p1, p2) {
