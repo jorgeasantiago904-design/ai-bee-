@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bee AI</title>
+    <title>Bee AI - Remixed</title>
     <style>
         * {
             box-sizing: border-box;
@@ -13,9 +13,9 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             /* Minecraft Bee Texture tile with a dark overlay to make text easy to read */
-            background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.9)), 
+            background: linear-gradient(rgba(10, 8, 4, 0.82), rgba(0, 0, 0, 0.96)), 
                         url('https://i.pinimg.com/236x/6e/68/21/6e6821db97f6c3fec38bc206776768db.jpg');
-            background-size: 120px; /* Perfectly sizes the block texture as a repeatable grid */
+            background-size: 100px; /* Perfectly sizes the block texture as a repeatable grid */
             background-repeat: repeat;
             color: #ffffff; 
             display: flex;
@@ -30,10 +30,10 @@
             100% { opacity: 1; filter: blur(0); transform: scale(1); }
         }
 
-        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb {
-            background: #333;
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
             transition: background 0.3s ease;
         }
@@ -42,13 +42,13 @@
         /* REMIXED SIDEBAR */
         .sidebar {
             width: 290px;
-            background-color: rgba(10, 8, 4, 0.92);
-            backdrop-filter: blur(25px);
+            background-color: rgba(14, 11, 6, 0.95);
+            backdrop-filter: blur(30px);
             padding: 24px 18px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            border-right: 1px solid rgba(251, 187, 44, 0.12); 
+            border-right: 1px solid rgba(251, 187, 44, 0.15); 
             flex-shrink: 0;
             z-index: 10;
             animation: slideSidebar 1s cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -65,7 +65,7 @@
             gap: 20px;
         }
         
-        /* STATIC LOGO CONTAINER (No Hover Effects) */
+        /* STATIC LOGO CONTAINER */
         .logo-container {
             display: flex;
             align-items: center;
@@ -74,35 +74,35 @@
             cursor: pointer;
         }
         .logo-img {
-            width: 34px;
-            height: 34px;
+            width: 38px;
+            height: 38px;
             object-fit: cover;
-            border-radius: 8px;
-            border: 1px solid rgba(251, 187, 44, 0.3);
-            background-color: transparent; 
+            border-radius: 10px;
+            border: 1px solid rgba(251, 187, 44, 0.4);
+            box-shadow: 0 0 12px rgba(251, 187, 44, 0.2);
             padding: 0;
             display: block;
         }
         
-        /* STYLING FOR YOUR CUSTOM PNG BRANDING IN SIDEBAR */
+        /* CUSTOM PNG BRANDING IN SIDEBAR */
         .logo-text-image {
-            height: 22px; 
+            height: 24px; 
             object-fit: contain;
             display: block;
         }
 
         /* REMIXED NEW CHAT BUTTON */
         .new-chat-btn {
-            background: rgba(251, 187, 44, 0.05);
+            background: rgba(251, 187, 44, 0.08);
             color: #fbbb2c;
-            border: 1px solid rgba(251, 187, 44, 0.25);
+            border: 1px solid rgba(251, 187, 44, 0.3);
             border-radius: 20px;
             padding: 12px 18px;
             text-align: left;
             font-size: 12px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             cursor: pointer;
             position: relative;
             overflow: hidden;
@@ -118,17 +118,17 @@
             background-color: #fbbb2c;
             color: #000000;
             border-color: #fbbb2c;
-            box-shadow: 0 6px 15px rgba(251, 187, 44, 0.15);
-            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(251, 187, 44, 0.25);
+            transform: translateY(-2px);
         }
-        .new-chat-btn:hover svg { transform: rotate(90deg); color: #000000; }
+        .new-chat-btn:hover svg { transform: rotate(90deg) scale(1.1); color: #000000; }
 
         .ripple {
             position: absolute;
             border-radius: 50%;
             transform: scale(0);
             animation: ripple-anim 0.6s linear;
-            background-color: rgba(251, 187, 44, 0.2);
+            background-color: rgba(251, 187, 44, 0.3);
         }
         @keyframes ripple-anim { to { transform: scale(4); opacity: 0; } }
 
@@ -140,25 +140,25 @@
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 8px;
             padding-right: 2px;
         }
         
         .history-item {
             padding: 12px 14px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.01);
-            border: 1px solid transparent;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.03);
             border-left: 3px solid transparent;
             cursor: pointer;
-            color: #999999; 
+            color: #b3b3b3; 
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: relative;
             transform-origin: left center;
             animation: listPopIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         @keyframes listPopIn {
@@ -167,18 +167,20 @@
         }
 
         .history-item:hover {
-            background: rgba(251, 187, 44, 0.04);
+            background: rgba(251, 187, 44, 0.05);
             color: #ffffff;
-            border-left: 3px solid rgba(251, 187, 44, 0.4);
+            border-left: 3px solid rgba(251, 187, 44, 0.6);
+            transform: translateX(2px);
         }
         .history-item.active {
-            background: rgba(251, 187, 44, 0.08);
+            background: rgba(251, 187, 44, 0.1);
             color: #fbbb2c;
             font-weight: 600;
             border-left: 3px solid #fbbb2c;
-            border-top: 1px solid rgba(251, 187, 44, 0.1);
-            border-right: 1px solid rgba(251, 187, 44, 0.1);
-            border-bottom: 1px solid rgba(251, 187, 44, 0.1);
+            border-top: 1px solid rgba(251, 187, 44, 0.2);
+            border-right: 1px solid rgba(251, 187, 44, 0.2);
+            border-bottom: 1px solid rgba(251, 187, 44, 0.2);
+            box-shadow: inset 0 0 8px rgba(251, 187, 44, 0.05);
         }
         .history-title {
             white-space: nowrap;
@@ -202,13 +204,13 @@
         }
         .history-item:hover .delete-chat-btn,
         .history-item.active .delete-chat-btn {
-            opacity: 0.5;
+            opacity: 0.6;
             transform: scale(1);
         }
         .delete-chat-btn:hover {
             opacity: 1 !important;
             color: #ff4444 !important;
-            transform: scale(1.1) !important;
+            transform: scale(1.2) !important;
         }
 
         .history-item.deleting {
@@ -220,14 +222,15 @@
 
         .sidebar-footer {
             padding: 16px 4px 4px 4px;
-            border-top: 1px solid rgba(251, 187, 44, 0.08);
+            border-top: 1px solid rgba(251, 187, 44, 0.1);
             font-size: 10px;
-            color: #444444;
+            color: #666666;
             letter-spacing: 2px;
             text-transform: uppercase;
             text-align: center;
         }
 
+        /* MAIN APP STYLES */
         .main-content {
             flex: 1;
             display: flex;
@@ -243,9 +246,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(251, 187, 44, 0.1); 
-            background: rgba(0, 0, 0, 0.65);
-            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(251, 187, 44, 0.15); 
+            background: rgba(10, 8, 4, 0.85);
+            backdrop-filter: blur(15px);
             flex-shrink: 0;
             height: 70px;
             animation: slideHeader 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -257,30 +260,28 @@
             to { transform: translateY(0); opacity: 1; }
         }
 
-        /* CONTAINER FOR TOP HEADER LOGO */
         .brand-title-container {
             display: flex;
             align-items: center;
             height: 100%;
         }
         
-        /* STYLING FOR YOUR CUSTOM PNG BRANDING IN TOP HEADER */
         .header-logo-image {
-            height: 24px; 
+            height: 26px; 
             object-fit: contain;
-            filter: drop-shadow(0 0 10px rgba(251, 187, 44, 0.45)); /* Replaces the old text glow shadow */
+            filter: drop-shadow(0 0 12px rgba(251, 187, 44, 0.6));
         }
 
         .model-select {
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.6);
             color: #ffffff;
-            border: 1px solid rgba(251, 187, 44, 0.3);
-            padding: 8px 16px;
+            border: 1px solid rgba(251, 187, 44, 0.35);
+            padding: 8px 18px;
             border-radius: 20px;
             font-size: 12px;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             outline: none;
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -289,7 +290,7 @@
         .model-select:hover {
             background-color: #fbbb2c;
             color: #000000;
-            box-shadow: 0 4px 15px rgba(251, 187, 44, 0.4);
+            box-shadow: 0 4px 20px rgba(251, 187, 44, 0.4);
             transform: translateY(-2px);
         }
         
@@ -325,13 +326,13 @@
             border-radius: 24px 24px 4px 24px;
             max-width: 75%;
             font-weight: 600;
-            box-shadow: 0 10px 25px rgba(251, 187, 44, 0.15);
+            box-shadow: 0 10px 25px rgba(251, 187, 44, 0.2);
             transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             word-wrap: break-word;
         }
         .message-row.user-row:hover .text-block {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 15px 35px rgba(251, 187, 44, 0.25);
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 15px 35px rgba(251, 187, 44, 0.35);
         }
 
         .message-row.ai-row {
@@ -339,9 +340,9 @@
             gap: 20px;
         }
         .ai-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
             background-color: transparent;
             color: #ffffff;
             display: flex;
@@ -352,7 +353,7 @@
             text-transform: uppercase;
             flex-shrink: 0;
             border: 2px solid #fbbb2c;
-            box-shadow: 0 0 15px rgba(251, 187, 44, 0.2);
+            box-shadow: 0 0 15px rgba(251, 187, 44, 0.25);
             transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
             overflow: hidden;
         }
@@ -363,60 +364,61 @@
         }
         .message-row.ai-row:hover .ai-avatar {
             box-shadow: 0 0 25px rgba(251, 187, 44, 0.8);
-            transform: scale(1.1);
+            transform: scale(1.1) rotate(5deg);
         }
         .message-row.ai-row .text-block {
-            color: #f0f0f0;
+            color: #f5f5f5;
             padding: 8px 0;
-            max-width: calc(100% - 60px);
+            max-width: calc(100% - 64px);
             font-size: 16px;
-            line-height: 1.7;
+            line-height: 1.75;
             width: 100%;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.95);
         }
 
         a.chat-link {
             color: #fbbb2c;
             text-decoration: none;
             font-weight: 600;
-            transition: color 0.2s ease, text-decoration 0.2s ease;
+            border-bottom: 1px dotted #fbbb2c;
+            transition: color 0.2s ease, border-color 0.2s ease;
         }
         a.chat-link:hover {
             color: #ffd666;
-            text-decoration: underline;
+            border-bottom-style: solid;
         }
    
         .code-container {
-            margin: 16px 0;
-            background: #0f0f0f;
-            border: 1px solid rgba(251, 187, 44, 0.2);
+            margin: 18px 0;
+            background: #090909;
+            border: 1px solid rgba(251, 187, 44, 0.25);
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.8);
             animation: liquidBounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
         }
         .code-header {
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.05);
             padding: 10px 18px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             font-size: 11px;
-            color: #888888;
+            color: #aaaaaa;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             font-weight: 700;
         }
         .copy-btn {
             background: transparent;
-            border: 1px solid rgba(251, 187, 44, 0.3);
-            color: #aaaaaa;
-            padding: 5px 10px;
+            border: 1px solid rgba(251, 187, 44, 0.4);
+            color: #bbbbbb;
+            padding: 5px 12px;
             border-radius: 6px;
             cursor: pointer;
             font-size: 10px;
-            font-weight: 600;
+            font-weight: 700;
             letter-spacing: 1px;
             text-transform: uppercase;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -425,7 +427,7 @@
             background-color: #fbbb2c !important;
             color: #000000 !important;
             border-color: #fbbb2c !important;
-            box-shadow: 0 0 10px rgba(251, 187, 44, 0.3);
+            box-shadow: 0 0 10px rgba(251, 187, 44, 0.4);
             transform: translateY(-1px);
         }
         .copy-btn:active { transform: translateY(1px); }
@@ -436,12 +438,12 @@
             overflow-x: auto;
             font-size: 14.5px;
             line-height: 1.6;
-            color: #e0e0e0;
+            color: #e5e5e5;
             font-family: 'Fira Code', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
         }
         .code-block::-webkit-scrollbar { height: 6px; }
         .code-block::-webkit-scrollbar-thumb {
-            background: #333333;
+            background: #252525;
             border-radius: 3px;
         }
         .code-block::-webkit-scrollbar-thumb:hover { background: #fbbb2c; }
@@ -475,7 +477,7 @@
             flex-direction: column;
             align-items: center;
             flex-shrink: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.95) 30%, transparent);
+            background: linear-gradient(to top, rgba(0,0,0,0.98) 30%, transparent);
             animation: slideInput 1s cubic-bezier(0.16, 1, 0.3, 1) both;
             z-index: 5;
         }
@@ -488,20 +490,20 @@
         .input-wrapper {
             max-width: 850px;
             width: 100%;
-            background-color: rgba(20, 20, 20, 0.92);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(251, 187, 44, 0.2);
+            background-color: rgba(15, 15, 15, 0.94);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(251, 187, 44, 0.25);
             border-radius: 24px;
             display: flex;
             flex-direction: column;
             padding: 12px 16px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.85);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.9);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
         }
         .input-wrapper:focus-within {
-            box-shadow: 0 15px 50px rgba(251, 187, 44, 0.15);
-            border-color: rgba(251, 187, 44, 0.5);
+            box-shadow: 0 15px 50px rgba(251, 187, 44, 0.18);
+            border-color: rgba(251, 187, 44, 0.6);
             transform: translateY(-2px);
         }
 
@@ -512,12 +514,12 @@
         }
         
         .action-btn {
-            background: rgba(255,255,255,0.05);
-            color: #aaaaaa;
+            background: rgba(255,255,255,0.06);
+            color: #bbbbbb;
             border: none;
             border-radius: 50%;
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -558,18 +560,18 @@
             transition: height 0.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
         textarea::placeholder {
-            color: #666666;
+            color: #555555;
             transition: color 0.3s ease;
         }
-        textarea:focus::placeholder { color: #aaaaaa; }
+        textarea:focus::placeholder { color: #888888; }
         
         .send-btn {
-            background-color: rgba(255,255,255,0.05);
-            color: #666666;
+            background-color: rgba(255,255,255,0.06);
+            color: #555555;
             border: none;
             border-radius: 50%;
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -583,10 +585,10 @@
         .send-btn.active {
             background-color: #fbbb2c;
             color: #000000;
-            box-shadow: 0 0 15px rgba(251, 187, 44, 0.4);
+            box-shadow: 0 0 15px rgba(251, 187, 44, 0.45);
         }
         .send-btn.active:hover {
-            box-shadow: 0 0 25px rgba(251, 187, 44, 0.8);
+            box-shadow: 0 0 25px rgba(251, 187, 44, 0.85);
             transform: translateY(-3px) scale(1.05);
         }
         .send-btn.active:hover svg { transform: translate(2px, -2px) scale(1.1); }
@@ -594,7 +596,7 @@
         .disclaimer {
             text-align: center;
             font-size: 11px;
-            color: #555555;
+            color: #444444;
             margin-top: 14px;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -609,7 +611,6 @@
         <div class="sidebar-header">
             <div class="logo-container" onclick="playClickSound(); location.reload()">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgGbIL8ZPdSPu6hTlRtfzbXE4hhPn977svX9BmFQN3Mg&s=10" alt="bee logo" class="logo-img">
-                
                 <img src="https://github.com/jorgeasantiago904-design/bee-ai-logo/blob/main/Untitled%20design%20(6).png?raw=true" alt="Bee logo" class="logo-text-image">
             </div>
             <button class="new-chat-btn" id="newChatBtn">
@@ -708,22 +709,6 @@
             localStorage.setItem('sol_permissions', JSON.stringify(savedPerms));
             return Promise.resolve(false);
         }
-    }
-
-    function createRipple(event, element) {
-        const circle = document.createElement("span");
-        const diameter = Math.max(element.clientWidth, element.clientHeight);
-        const radius = diameter / 2;
-        const rect = element.getBoundingClientRect();
-        
-        circle.style.width = circle.style.height = `${diameter}px`;
-        circle.style.left = `${event.clientX - rect.left - radius}px`;
-        circle.style.top = `${event.clientY - rect.top - radius}px`;
-        circle.classList.add("ripple");
-        
-        const ripple = element.querySelector(".ripple");
-        if (ripple) { ripple.remove(); }
-        element.appendChild(circle);
     }
 
     newChatBtn.addEventListener("mousedown", function(e) { 
@@ -1036,7 +1021,7 @@
         row.className = 'message-row ai-row';
         row.style.animationDelay = '0s';
         row.innerHTML = `
-            <div class="ai-avatar" style="border-color: #555;">Bee</div>
+            <div class="ai-avatar" style="border-color: #444;">Bee</div>
             <div class="text-block" style="color: #666; font-size: 13px; font-weight: 600;">${escapeHtml(text)}</div>
         `;
         chatBox.appendChild(row);
@@ -1110,7 +1095,7 @@
                 textPart = textPart.replace(/\n/g, '<br>');
                 textPart = textPart.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" style="max-width: 100%; border-radius: 16px; margin-top: 12px; display: block; border: 1px solid rgba(251,187,44,0.3); box-shadow: 0 10px 30px rgba(251,187,44,0.1); animation: liquidBounce 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;">');
                 textPart = textPart.replace(/_([^_]+)_/g, '<em>$1</em>');
-                textPart = textPart.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+                textPart = textPart.replace(/\*\*([^*]+)\*\"/g, '<strong>$1</strong>');
                 textPart = textPart.replace(/(^|\s)(https:\/\/image\.pollinations\.ai\/[^\s<]+)/g, '$1<img src="$2" alt="Generated Image" style="max-width: 100%; border-radius: 16px; margin-top: 12px; display: block; border: 1px solid rgba(251,187,44,0.3); box-shadow: 0 10px 30px rgba(251,187,44,0.1); animation: liquidBounce 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;">');
                 textPart = textPart.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" class="chat-link">$1</a>');
                 textPart = textPart.replace(/(^|\s)(https?:\/\/[^\s<)]+)/g, function(match, p1, p2) {
@@ -1163,7 +1148,6 @@
         }
     }
 
-    // FIXED: Ensured event object is verified to prevent errors on click events
     function createRipple(event, element) {
         if (!event) return; 
         const circle = document.createElement("span");
